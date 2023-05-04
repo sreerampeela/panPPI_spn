@@ -27,20 +27,14 @@ for prot in node_names:
 essential_mean = np.array(essential_btwnness).mean()
 nonessential_mean = np.array(nonessential_btwnness).mean()
 
-print(essential_mean, nonessential_mean)
-all_btness = np.array(dframe["BetweennessCentrality"])
-all_btness_sorted = np.sort(all_btness)
-print(all_btness_sorted[::-1])
 
-
-# for i in range(10000):
-#     # random.seed(1612)
-#     random_data = random.sample(nonessential_btwnness,len(essential_btwnness))
-#     random_mean = np.array(nonessential_btwnness).mean()
-#     t_test = st.ttest_ind(essential_btwnness,random_data, alternative='two-sided')
-#     print(t_test)
-#     data = "\t".join([str(i),str(t_test.statistic),str(round(t_test.pvalue,6))])
-#     # fout.write(data+"\n")
+for i in range(10000):
+    random_data = random.sample(nonessential_btwnness,len(essential_btwnness))
+    random_mean = np.array(nonessential_btwnness).mean()
+    t_test = st.ttest_ind(essential_btwnness,random_data, alternative='two-sided')
+    print(t_test)
+    data = "\t".join([str(i),str(t_test.statistic),str(round(t_test.pvalue,6))])
+    fout.write(data+"\n")
 
 
 fin.close()
